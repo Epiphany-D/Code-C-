@@ -8,7 +8,7 @@ using namespace std;
 #define MIN(a,b) (a)>(b)?(b):(a)
 typedef int  Status;
 
-
+ 
 
     
 int main() {
