@@ -5,7 +5,7 @@ using namespace std;
 #define ERROR 0
 #define MAX(a, b) (a) > (b) ? (a) : (b)
 #define MIN(a, b) (a) > (b) ? (b) : (a)
-#define node (BiTree)malloc(sizeof(BitNode))
+#define node (BiTree) malloc(sizeof(BitNode))
 typedef int Status;
 typedef int elemtype;
 
@@ -15,35 +15,50 @@ typedef struct BitNode {
     struct BitNode *lchild, *rchild;
 } BitNode, *BiTree;
 //操作函数列表
-Status InitBiTree(BiTree &p);
-Status DesstroyBiTree(BiTree &p);
+Status DestroyTree(BiTree &p);
 Status CreatTree(BiTree &p, elemtype x);
 Status ClearTree(BiTree &p);
-Status IsEmpty(BiTree p);
-Status Depth(BiTree p);
 Status InsertDataL(elemtype x, BiTree &parent);
 Status InsertDataR(elemtype x, BiTree &parent);
-
+Status DeleteNodeL(BiTree &parent);
+Status DeleteNodeR(BiTree &parent);
 int main() {
     BiTree tree, p;
     CreatTree(tree, 0);
     p = tree;
     InsertDataL(23, p);
     InsertDataR(32, p);
-    cout << p->data << " " << p->lchild->data << endl;
+    ClearTree(p);
+    cout << p->data << endl;
     system("pause");
     return 0;
 }
 
-//生成一个树的根
-Status CreatTree(BiTree &p, elemtype x) {
-    if ((p = node) == NULL) {
+//生成一个二叉树
+Status CreatTree(BiTree &T, elemtype x) {
+    if ((T = node) == NULL) {
         return ERROR;
     }
-    p->data = x;
-    p->lchild = NULL;
-    p->rchild = NULL;
+    T->data = x;
+    T->lchild = NULL;
+    T->rchild = NULL;
     return OK;
+}
+//删除一棵二叉树
+Status DestroyTree(BiTree &T) {
+    if (T == NULL) {
+        return OK;
+    } else {
+        DestroyTree(T->lchild);
+        DestroyTree(T->rchild);
+        free(T);
+    }
+}
+//初始化一棵二叉树
+Status ClearTree(BiTree &T) {
+    DestroyTree(T->lchild);
+    DestroyTree(T->rchild);
+    T->data = 0;
 }
 //二叉树插入
 Status InsertDataL(elemtype x, BiTree &parent) {
@@ -67,7 +82,6 @@ Status InsertDataL(elemtype x, BiTree &parent) {
     return OK;
 }
 Status InsertDataR(elemtype x, BiTree &parent) {
-
     BiTree p;
     if (parent == NULL) {
         cout << "插入数字出错" << endl;
@@ -87,11 +101,36 @@ Status InsertDataR(elemtype x, BiTree &parent) {
     }
     return OK;
 }
-//初始化一棵二叉树
-Status InitBiTree(BiTree &p){
-    
+//二叉树删除叶子节点
+Status DeleteNodeL(BiTree &parent) {
+    BiTree p;
+    if (!parent || !parent->lchild) {
+        cout << "删除节点失败" << endl;
+        return ERROR;
+    }
+    p = parent->lchild;
+    if (p->lchild || p->rchild) {
+        cout << "要删除的节点不是叶子节点" << endl;
+        return ERROR;
+    }
+    parent->lchild = NULL;
+    free(p);
+    return OK;
 }
-Status DesstroyBiTree(BiTree &p);
-Status ClearTree(BiTree &p);
-Status IsEmpty(BiTree p);
-Status Depth(BiTree p);
+Status DeleteNodeR(BiTree &parent) {
+    BiTree p;
+    if (!parent || !parent->rchild) {
+        cout << "删除节点失败" << endl;
+        return ERROR;
+    }
+    p = parent->rchild;
+    if (p->lchild || p->rchild) {
+        cout << "要删除的节点不是叶子节点" << endl;
+        return ERROR;
+    }
+    parent->rchild = NULL;
+    free(p);
+    return OK;
+}
+//二叉树的遍历
+Status
