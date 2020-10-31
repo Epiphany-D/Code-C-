@@ -5,6 +5,7 @@ using namespace std;
 #define ERROR 0
 #define MAX(a, b) (a) > (b) ? (a) : (b)
 #define MIN(a, b) (a) > (b) ? (b) : (a)
+#define node (BiTree)malloc(sizeof(BitNode))
 typedef int Status;
 typedef int elemtype;
 
@@ -14,7 +15,12 @@ typedef struct BitNode {
     struct BitNode *lchild, *rchild;
 } BitNode, *BiTree;
 //操作函数列表
+Status InitBiTree(BiTree &p);
+Status DesstroyBiTree(BiTree &p);
 Status CreatTree(BiTree &p, elemtype x);
+Status ClearTree(BiTree &p);
+Status IsEmpty(BiTree p);
+Status Depth(BiTree p);
 Status InsertDataL(elemtype x, BiTree &parent);
 Status InsertDataR(elemtype x, BiTree &parent);
 
@@ -31,7 +37,7 @@ int main() {
 
 //生成一个树的根
 Status CreatTree(BiTree &p, elemtype x) {
-    if ((p = (BiTree)malloc(sizeof(BitNode))) == NULL) {
+    if ((p = node) == NULL) {
         return ERROR;
     }
     p->data = x;
@@ -46,7 +52,7 @@ Status InsertDataL(elemtype x, BiTree &parent) {
         cout << "插入数字出错" << endl;
         return ERROR;
     }
-    if ((p = (BiTree)malloc(sizeof(BitNode))) == NULL) {
+    if ((p = node) == NULL) {
         return ERROR;
     }
     p->data = x;
@@ -61,12 +67,13 @@ Status InsertDataL(elemtype x, BiTree &parent) {
     return OK;
 }
 Status InsertDataR(elemtype x, BiTree &parent) {
+
     BiTree p;
     if (parent == NULL) {
         cout << "插入数字出错" << endl;
         return ERROR;
     }
-    if ((p = (BiTree)malloc(sizeof(BitNode))) == NULL) {
+    if ((p = node) == NULL) {
         return ERROR;
     }
     p->data = x;
@@ -80,3 +87,11 @@ Status InsertDataR(elemtype x, BiTree &parent) {
     }
     return OK;
 }
+//初始化一棵二叉树
+Status InitBiTree(BiTree &p){
+    
+}
+Status DesstroyBiTree(BiTree &p);
+Status ClearTree(BiTree &p);
+Status IsEmpty(BiTree p);
+Status Depth(BiTree p);
