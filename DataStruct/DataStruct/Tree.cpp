@@ -64,7 +64,7 @@ Status ClearTree(BiTree &T) {
 Status InsertDataL(elemtype x, BiTree &parent) {
     BiTree p;
     if (parent == NULL) {
-        cout << "插入数字出错" << endl;
+        cout << "插入数据失败" << endl;
         return ERROR;
     }
     if ((p = node) == NULL) {
@@ -84,7 +84,7 @@ Status InsertDataL(elemtype x, BiTree &parent) {
 Status InsertDataR(elemtype x, BiTree &parent) {
     BiTree p;
     if (parent == NULL) {
-        cout << "插入数字出错" << endl;
+        cout << "插入数据失败" << endl;
         return ERROR;
     }
     if ((p = node) == NULL) {
