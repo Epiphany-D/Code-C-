@@ -1,4 +1,4 @@
-//7-2 堆栈操作合法性
+// 7-2 堆栈操作合法性 (20分)
 #include<iostream>
 #include<malloc.h>
 #include<stdlib.h>

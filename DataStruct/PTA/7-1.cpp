@@ -1,4 +1,4 @@
-//7-1 两个有序链表的交集
+// 7-1 两个有序链表序列的交集 (20分)
 #include <stdio.h>
 #include <stdlib.h>
 
