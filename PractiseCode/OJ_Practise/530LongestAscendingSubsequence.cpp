@@ -1,4 +1,3 @@
-//最长上升子序列
 #include <bits/stdc++.h>
 using namespace std;
 #define MAX_N 1000
