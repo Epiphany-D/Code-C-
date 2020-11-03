@@ -1,3 +1,4 @@
+//数字三角形
 #include <stdio.h>
 int max[101][101];
 int d[101][101];
