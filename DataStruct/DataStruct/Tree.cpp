@@ -14,25 +14,7 @@ typedef struct BitNode {
     Status data;
     struct BitNode *lchild, *rchild;
 } BitNode, *BiTree;
-//操作函数列表
-Status DestroyTree(BiTree &p);
-Status CreatTree(BiTree &p, elemtype x);
-Status ClearTree(BiTree &p);
-Status InsertDataL(elemtype x, BiTree &parent);
-Status InsertDataR(elemtype x, BiTree &parent);
-Status DeleteNodeL(BiTree &parent);
-Status DeleteNodeR(BiTree &parent);
-int main() {
-    BiTree tree, p;
-    CreatTree(tree, 0);
-    p = tree;
-    InsertDataL(23, p);
-    InsertDataR(32, p);
-    ClearTree(p);
-    cout << p->data << endl;
-    system("pause");
-    return 0;
-}
+/*操作函数列表*/
 
 //生成一个二叉树
 Status CreatTree(BiTree &T, elemtype x) {
@@ -133,4 +115,44 @@ Status DeleteNodeR(BiTree &parent) {
     return OK;
 }
 //二叉树的遍历
-Status
+Status PreOrder(BiTree T) {
+    if (T == NULL)
+        return OK;
+    cout << T->data << endl;
+    PreOrder(T->lchild);
+    PreOrder(T->rchild);
+}
+Status InOrder(BiTree T) {
+    if (T == NULL)
+        return OK;
+    PreOrder(T->lchild);
+    cout << T->data << endl;
+    PreOrder(T->rchild);
+}
+Status PostOrder(BiTree T) {
+    if (T == NULL)
+        return OK;
+    PreOrder(T->lchild);
+    PreOrder(T->rchild);
+    cout << T->data << endl;
+}
+//统计叶子节点数
+Status CountLeaf(BiTree T) {
+    if (T == NULL)
+        return 0;
+    if (T->lchild == NULL && T->rchild == NULL)
+        return 1;
+    return CountLeaf(T->lchild) + CountLeaf(T->rchild);
+}
+
+int main() {
+    BiTree tree, p;
+    CreatTree(tree, 0);
+    p = tree;
+    InsertDataL(23, p);
+    InsertDataR(32, p);
+    ClearTree(p);
+    cout << p->data << endl;
+    system("pause");
+    return 0;
+}
