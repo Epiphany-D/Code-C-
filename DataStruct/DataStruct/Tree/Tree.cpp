@@ -144,15 +144,25 @@ Status CountLeaf(BiTree T) {
         return 1;
     return CountLeaf(T->lchild) + CountLeaf(T->rchild);
 }
-
+//获得树的高度
+Status GetHeight(BiTree T) {
+    int l, r;
+    if (T->lchild)
+        l = GetHeight(T->lchild) + 1;
+    else if (T->rchild)
+        r = GetHeight(T->rchild) + 1;
+    else
+        return 0;
+    return l > r ? l : r;
+}
 int main() {
     BiTree tree, p;
     CreatTree(tree, 0);
     p = tree;
     InsertDataL(23, p);
     InsertDataR(32, p);
-    ClearTree(p);
-    cout << p->data << endl;
+    // ClearTree(p);
+    cout << GetHeight(p) << endl;
     system("pause");
     return 0;
 }
