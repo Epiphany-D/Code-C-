@@ -144,6 +144,15 @@ Status CountLeaf(BiTree T) {
         return 1;
     return CountLeaf(T->lchild) + CountLeaf(T->rchild);
 }
+//输出叶子结点
+void PreorderPrintLeaves(BiTree T) {
+    if (T) {
+        if (T->Left == NULL && T->Right == NULL)
+            printf(" %c", T->Data);  //格式为一个空格跟着一个字符。
+        PreorderPrintLeaves(T->Left);
+        PreorderPrintLeaves(T->Right);
+    }
+}
 //获得树的高度
 Status GetHeight(BiTree T) {
     int l, r;
@@ -155,6 +164,7 @@ Status GetHeight(BiTree T) {
         return 0;
     return l > r ? l : r;
 }
+
 int main() {
     BiTree tree, p;
     CreatTree(tree, 0);
