@@ -121,21 +121,21 @@ Status PreOrder(BiTree T) {
     cout << T->data << endl;
     PreOrder(T->lchild);
     PreOrder(T->rchild);
-}
+}//前序
 Status InOrder(BiTree T) {
     if (T == NULL)
         return OK;
     PreOrder(T->lchild);
     cout << T->data << endl;
     PreOrder(T->rchild);
-}
+}//中序
 Status PostOrder(BiTree T) {
     if (T == NULL)
         return OK;
     PreOrder(T->lchild);
     PreOrder(T->rchild);
     cout << T->data << endl;
-}
+}//后序
 //统计叶子节点数
 Status CountLeaf(BiTree T) {
     if (T == NULL)
