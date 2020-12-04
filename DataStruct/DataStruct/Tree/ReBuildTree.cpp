@@ -7,6 +7,7 @@ typedef struct BiTNode {
     struct BiTNode *lchild;
     struct BiTNode *rchild;
 } BiTNode, *BiTree;
+// 根据中序和后序遍历重构一棵树
 BiTree Build(int *in, int *post, int n) {
     if (n <= 0)
         return NULL;
