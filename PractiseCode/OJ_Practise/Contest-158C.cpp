@@ -39,22 +39,21 @@ int main() {
     int inx;
     int ans;
     char s[30];
-
-    while (cin >> n, n) {
-        int flag[30] = {1};
-        int lock[30] = {0};
+    while (~scanf("%d", &n), n) {
         int ans = 0;
+        int flag[30] = {0};
+        int lock[30] = {0};
         while (n--) {
             scanf("%s", &s);
             int i = 2;
             while (s[i] != '\0') {
-                if (flag[s[0] - 'A'] == flag[s[i] - 'A' - 1] && !lock[s[i] - 'A' - 1]) {
-                    flag[s[i] - 'A' - 1]++;
+                if (flag[s[0] - 'A'] == flag[s[i] - 'A'] && !lock[s[i] - 'A']) {
+                    flag[s[i] - 'A']++;
                 }
                 i++;
             }
             lock[s[0] - 'A']++;
-            ans = ans > flag[s[0] - 'A'] ? ans : flag[s[0] - 'A'];
+            ans = ans > flag[s[0] - 'A'] + 1 ? ans : flag[s[0] - 'A'] + 1;
         }
         if (ans == 1)
             printf("1 channel needed.\n");
