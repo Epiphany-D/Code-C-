@@ -30,20 +30,40 @@
 // 1 channel needed.
 // 3 channels needed.
 
-
 #include <bits/stdc++.h>
 #include <cstdlib>
 using namespace std;
 
-
-
 int main() {
     int n;
-    while(cin>>n,n){
-        int num = 0;
-        while(n--){
-            scanf("A:%s")
+    int inx;
+    int ans;
+    char s[30];
+
+    while (cin >> n, n) {
+        int flag[30] = {1};
+        int lock[30] = {0};
+        int ans = 0;
+        while (n--) {
+            scanf("%s", &s);
+            int i = 2;
+            while (s[i] != '\0') {
+                if (flag[s[0] - 'A'] == flag[s[i] - 'A' - 1] && !lock[s[i] - 'A' - 1]) {
+                    flag[s[i] - 'A' - 1]++;
+                }
+                i++;
+            }
+            lock[s[0] - 'A']++;
+            ans = ans > flag[s[0] - 'A'] ? ans : flag[s[0] - 'A'];
         }
+        if (ans == 1)
+            printf("1 channel needed.\n");
+        else if (ans == 2)
+            printf("2 channels needed.\n");
+        else if (ans == 3)
+            printf("3 channels needed.\n");
+        else
+            printf("4 channels needed.\n");
     }
     return 0;
 }
