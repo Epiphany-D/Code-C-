@@ -1,4 +1,4 @@
-int Isprime(int x) {
+int IsPrime(int x) {
     int i;
     int flag = 1;
     if (x == 1)
