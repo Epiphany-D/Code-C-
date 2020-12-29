@@ -1,5 +1,5 @@
 // 约瑟夫问题
-// 递推公式： f(N,M)=(f(N−1,M)+M)%Nf(N,M)=(f(N−1,M)+M)%N
+// 递推公式： f(N,M)=(f(N−1,M)+M)%N
 
 #include <bits/stdc++.h>
 using namespace std;

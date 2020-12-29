@@ -41,19 +41,21 @@ int main() {
     char s[30];
     while (~scanf("%d", &n), n) {
         int ans = 0;
-        int flag[30] = {0};
-        int lock[30] = {0};
+        int flag[30] = {0};  //储存颜色种类，先使得所有字母都用颜色0来标注
+        int lock[30] = {0};  //上锁，当lock[对应字母]为1后该字母颜色不改变
         while (n--) {
             scanf("%s", &s);
             int i = 2;
             while (s[i] != '\0') {
                 if (flag[s[0] - 'A'] == flag[s[i] - 'A'] && !lock[s[i] - 'A']) {
-                    flag[s[i] - 'A']++;
+                    flag[s[i] - 'A']++;//颜色冲突，换下一种颜色
                 }
                 i++;
             }
             lock[s[0] - 'A']++;
             ans = ans > flag[s[0] - 'A'] + 1 ? ans : flag[s[0] - 'A'] + 1;
+            if (ans > 3)
+                break;
         }
         if (ans == 1)
             printf("1 channel needed.\n");

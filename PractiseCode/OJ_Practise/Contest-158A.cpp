@@ -32,13 +32,12 @@ int main() {
     return 0;
 }
 
-int Seg(int n, int k, int pre) {
+int Seg(int n, int k, int pre) {//n是要划分的数字，k是份数，pre是上一次分得的数字，为了避免重复每次分出来的数字都要比pre大
     int ans = 0;
-    if (k == 1) {
-        // if (n >= pre)
+    if (k == 1) {//当把n分成1份时，只有一种分法
             return 1;
     }
-    for (int i = pre; i <= n / 2; i++) {
+    for (int i = pre; i <= n / 2; i++) {//n/2之后的数字是重复的，所以到这里结束循环
         ans += Seg(n - i, k - 1, i);
     }
     return ans;
