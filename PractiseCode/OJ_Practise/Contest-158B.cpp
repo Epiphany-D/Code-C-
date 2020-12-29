@@ -31,7 +31,6 @@
 #include <cstdlib>
 using namespace std;
 
-// int flag[110][110] = 0;不需要
 int sub[110][110] = {0};
 int Area(int x, int y);
 

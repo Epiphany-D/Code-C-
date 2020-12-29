@@ -45,44 +45,98 @@
 // ******
 // course
 // ******
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <algorithm>
 
+/*我的写法↓AC了*/
+
+// #include <stdio.h>
+// #include <string.h>
+// #include <stdlib.h>
+// #include <algorithm>
+
+// using namespace std;
+// struct Dir  //字典中的单词
+// {
+//     char str[10];     //读入时的排列顺序
+//     char sorted[10];  //排序后的顺序
+// } dir[101];           //字典
+
+// int compare(const void *arg1, const void *arg2) {
+//     return strcmp((*(struct Dir *)arg1).str, (*(struct Dir *)arg2).str);
+// }
+
+// int main() {
+//     int i = 0;
+//     while (scanf("%s", &dir[i].str) && strcmp(dir[i].str, "XXXXXX")) {
+//         strcpy(dir[i].sorted, dir[i].str);
+//         //对字典中每个单词的字母按ASCII编码值进行排序
+//         sort(dir[i].sorted, dir[i].sorted + strlen(dir[i].str));
+//         ++i;
+//     }
+//     qsort(dir, i, sizeof(dir[0]), compare);  //对字典中所有单词进行排序
+//     char s[10];
+//     while (scanf("%s", s) && strcmp(s, "XXXXXX")) {
+//         sort(s, s + strlen(s));  //对读入的打乱字母顺序的单词中的字母排序
+//         bool flag = false;       //是否查找到匹配单词的标志
+//         for (int j = 0; j < i; ++j) {
+//             if (strcmp(s, dir[j].sorted) == 0) {
+//                 flag = true;
+//                 printf("%s\n", dir[j].str);
+//             }
+//         }
+//         if (!flag)
+//             printf("NOT A VALID WORD\n");
+//         printf("******\n");
+//     }
+//     return 0;
+// }
+
+/*怀智大佬的写法↓*/
+
+#include <bits/stdc++.h>
+#define res register int
 using namespace std;
-struct Dir  //字典中的单词
-{
-    char str[10];     //读入时的排列顺序
-    char sorted[10];  //排序后的顺序
-} dir[101];           //字典
-
-int compare(const void *arg1, const void *arg2) {
-    return strcmp((*(struct Dir *)arg1).str, (*(struct Dir *)arg2).str);
-}
-
-int main() {
-    int i = 0;
-    while (scanf("%s", &dir[i].str) && strcmp(dir[i].str, "XXXXXX")) {
-        strcpy(dir[i].sorted, dir[i].str);
-        //对字典中每个单词的字母按ASCII编码值进行排序
-        sort(dir[i].sorted, dir[i].sorted + strlen(dir[i].str));
-        ++i;
+const int maxn = 1e2 + 12;
+struct node {
+    string word;
+    string ans;
+    void st() {
+        sort(this->word.begin(), this->word.end());
     }
-    qsort(dir, i, sizeof(dir[0]), compare);  //对字典中所有单词进行排序
-    char s[10];
-    while (scanf("%s", s) && strcmp(s, "XXXXXX")) {
-        sort(s, s + strlen(s));  //对读入的打乱字母顺序的单词中的字母排序
-        bool flag = false;       //是否查找到匹配单词的标志
-        for (int j = 0; j < i; ++j) {
-            if (strcmp(s, dir[j].sorted) == 0) {
-                flag = true;
-                printf("%s\n", dir[j].str);
-            }
+} v[maxn];
+string s;
+inline int cmp(const node &a, const node &b) {
+    return a.ans < b.ans;
+}
+int main() {
+    int n = 0;
+    while (1) {
+        cin >> v[++n].word;
+        if (v[n].word == "XXXXXX") {
+            n--;
+            break;
         }
-        if (!flag)
-            printf("NOT A VALID WORD\n");
-        printf("******\n");
+        v[n].ans = v[n].word;
+        v[n].st();
+    }
+    sort(v + 1, v + n + 1, cmp);
+    while (1) {
+        s.clear();
+        cin >> s;
+        if (s == "XXXXXX")
+            break;
+        else {
+            sort(s.begin(), s.end());
+            bool cg = 0;
+            for (res i = 1; i <= n; i++) {
+                if (!s.compare(v[i].word)) {
+                    cout << v[i].ans << endl;
+                    cg = 1;
+                }
+            }
+            if (!cg)
+                cout << "NOT A VALID WORD\n";
+            cout << "******\n";
+        }
     }
     return 0;
 }

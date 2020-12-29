@@ -30,36 +30,93 @@
 // 12
 // no solution
 
-#include <stdio.h>
-#include <algorithm>
+/*O(n3)超时↓*/
+// #include <stdio.h>
+// #include <algorithm>
 
+// using namespace std;
+
+// int main() {
+//     int n, i, j, flag, k;
+//     int a[1005];
+//     while (scanf("%d", &n), n != 0) {
+//         flag = 0;
+//         for (i = 0; i < n; i++)
+//             scanf("%d", &a[i]);
+//         sort(a, a + n);
+//         for (i = n - 1; i >= 2; i--) {
+//             for (j = i - 1; j >= 1; j--) {
+//                 for (k = j - 1; k >= 0; k--) {
+//                     if (a[i] - a[j] == a[k]) {
+//                         printf("%d\n", a[i]);
+//                         flag = 1;
+//                         break;
+//                     }
+//                 }
+//                 if (flag)
+//                     break;
+//             }
+//             if (flag)
+//                 break;
+//         }
+//         if (!flag)
+//             printf("no solution\n");
+//     }
+//     return 0;
+// }
+
+/*暴力+二分*/
+#include<bits/stdc++.h>
 using namespace std;
-
-int main() {
-    int n, i, j, flag, k;
-    int a[1005];
-    while (scanf("%d", &n), n != 0) {
-        flag = 0;
-        for (i = 0; i < n; i++)
-            scanf("%d", &a[i]);
-        sort(a, a + n);
-        for (i = n - 1; i >= 2; i--) {
-            for (j = i - 1; j >= 1; j--) {
-                for (k = j - 1; k >= 0; k--) {
-                    if (a[i] - a[j] == a[k]) {
-                        printf("%d\n", a[i]);
-                        flag = 1;
-                        break;
-                    }
-                }
-                if (flag)
-                    break;
-            }
-            if (flag)
-                break;
+int n, t, ans;
+int a[1005];
+//二分查找位置
+int bin(int l, int h, int k) {
+    int m;
+    while (l < h) {
+        m = (l + h) / 2;
+        if (k == a[m]) {
+            return m;
+        } else if (k < a[m]) {
+            h = m-1;
+        } else {
+            l = m + 1;
         }
-        if (!flag)
+    }
+    return -1;
+}
+
+void Find() {
+    //开启无脑循环
+    //i为和
+    for (int i = n - 1; i >= 0; i--) {
+        //j为第一个数，j<i保证a[j]<a[i]
+        for (int j = 0; j < i; j++) {
+            //k为第二个数,
+            for (int k = j + 1; k < i; k++) {
+                //t为准~第三个数
+                t = a[i] - a[k] - a[j];
+                if (bin(k + 1, i, t) != -1) {
+                    ans = i;
+                    return;
+                }
+            }
+        }
+    }
+}
+int main() {
+    while (scanf("%d", &n) && n) {
+        for (int i = 0; i < n; i++) {
+            scanf("%d", a + i);
+        }
+        sort(a, a + n);
+        ans = 0;
+        Find();
+        if (ans) {
+            printf("%d\n", a[ans]);
+        } else {
             printf("no solution\n");
+        }
     }
     return 0;
 }
