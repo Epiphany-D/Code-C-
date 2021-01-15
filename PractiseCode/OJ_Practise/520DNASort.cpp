@@ -62,10 +62,8 @@ int getDNAInversionNumber(char* dnaStr) {
     return count;
 }
 
-int cmp(const void* a, const void* b) {
-    DNA* DNA_A = (DNA*)a;
-    DNA* DNA_B = (DNA*)b;
-    return (DNA_A->count) - (DNA_B->count);
+bool cmp(const DNA& a, const DNA& b) {
+    return a.count < b.count;
 }
 
 int main() {
@@ -77,7 +75,7 @@ int main() {
             dnas[i].count = getDNAInversionNumber(dnas[i].DNAStr);
         }
 
-        qsort(dnas, N, sizeof(DNA), cmp);
+        sort(dnas, dnas + N, cmp);
 
         for (int i = 0; i < N; i++) {
             cout << dnas[i].DNAStr << endl;
