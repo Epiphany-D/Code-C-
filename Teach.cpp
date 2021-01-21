@@ -1,19 +1,25 @@
-#include <iostream>
-#include <string>
-using namespace std;
+#include <stdio.h>
+#include <math.h>
 int main() {
-    int n, k, i, j;
-    string str[101];
-    cin >> n >> k;
-    for (i = 0; i < n; i++)
-        cin >> str[i];
-    for (i = 0; i < k; i++) {
-        for (j = 0; j < n - i - 1; j++) {
-            if (str[j] > str[j + 1])
-                swap(str[j], str[j + 1]);
+    int x, i, s, flag;
+    while (scanf("%d", &x) != EOF) {
+        s = 0;
+        while (x > 0) {
+            flag = 1;
+            if (x == 1)
+                flag = 0;
+            else {
+                for (i = 2; i <= sqrt(x); i++) {
+                    if (x % i == 0)
+                        flag = 0;
+                    break;
+                }
+            }
+            if (flag == 1)
+                s += x;
+            scanf("%d", &x);
         }
+        printf("%d\n", s);
     }
-    for (i = 0; i < n; i++)
-        cout << str[i] << endl;
     return 0;
 }
