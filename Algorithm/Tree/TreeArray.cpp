@@ -18,6 +18,8 @@ int sum(int x) {  //返回值是前缀和：ans = a1 + ... + ax
     return ans;
 }
 
+
+
 //例题：
 /*Color the ball hdu 1556
 问题描述：N个气球排成一排，从左到右依次编号为1, 2, 3 … N。每次给定2个整数L, R(L<= R)，lele从气球L开始到气球R依次给每个气球涂一次颜色。
@@ -49,26 +51,29 @@ int sum(int x) {  //返回值是前缀和：ans = a1 + ... + ax
 // }
 
 //hdu 1556 用差分数组求解
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 const int Maxn = 100010;
-int a[Maxn],D[Maxn];               //a是气球，D是差分数组
+int a[Maxn], D[Maxn];  //a是气球，D是差分数组
 
-int main(){
+int main() {
     int n;
-    while(~scanf("%d",&n)) { 
-        memset(a,0,sizeof(a)); memset(D,0,sizeof(D));
-        for(int i=1;i<=n;i++){
-            int L,R; scanf("%d%d",&L,&R);
-            D[L]++;                 //差分，原理和前面树状数组一样
-            D[R+1]--;
+    while (~scanf("%d", &n)) {
+        memset(a, 0, sizeof(a));
+        memset(D, 0, sizeof(D));
+        for (int i = 1; i <= n; i++) {
+            int L, R;
+            scanf("%d%d", &L, &R);
+            D[L]++;  //差分，原理和前面树状数组一样
+            D[R + 1]--;
         }
-        for(int i=1;i<=n;i++){
-            a[i] = a[i-1] + D[i];          //求前缀和a[]，a[i]就是气球i的值
-            if(i!=n)  printf("%d ", a[i]);  //逐个打印结果
-            else      printf("%d\n",a[i]);
-        }        
+        for (int i = 1; i <= n; i++) {
+            a[i] = a[i - 1] + D[i];  //求前缀和a[]，a[i]就是气球i的值
+            if (i != n)
+                printf("%d ", a[i]);  //逐个打印结果
+            else
+                printf("%d\n", a[i]);
+        }
     }
     return 0;
 }
-
