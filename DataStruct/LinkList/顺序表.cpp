@@ -36,11 +36,12 @@ int IsEmpty(SqList L) {
     else
         return 0;
 }
-ElemType GetElem(SqList L, int i) {
+Status GetElem(SqList L, int i,ElemType &e) {
     if (i < 1 || i > L.length)
         return ERROR;
     //判断i值是否合理，若不合理，返回ERROR
-    return L.elem[i - 1];  //第i-1的单元存储着第i个数据
+    e = L.elem[i - 1];  //第i-1的单元存储着第i个数据
+    return OK;
 }
 int Elem_SqList(List L, Status m) {
     int i = 0;
@@ -59,7 +60,7 @@ int LocateELem(SqList L, ElemType e) {
             return i + 1;
     return 0;
 }
-status ListInsert_Sq(SqList &L, int i, ElemType e) {
+Status ListInsert_Sq(SqList &L, int i, ElemType e) {
     if (i < 1 || i > L.length + 1)
         return ERROR;  //i值不合法
     if (L.length == MAXSIZE)
@@ -70,7 +71,7 @@ status ListInsert_Sq(SqList &L, int i, ElemType e) {
     L.length++;                     //表长增1
     return OK;
 }
-status ListDelete_Sq(SqList &L, int i) {
+Status ListDelete_Sq(SqList &L, int i) {
     if ((i < 1) || (i > L.length))
         return ERROR;  //i值不合法
     for (j = i - 1; j < L.length - 1; j++)
